@@ -18,6 +18,7 @@ export default function LoginPage() {
   const dataBaseList = [
     { name: 'admin', password: 'admin', userType: 'admin' },
     { name: 'hello', password: 'hello', userType: 'admin' },
+    { name: 'gene', password: 'gene', userType: 'admin' },
   ]
 
   const handleChangeName = (e) => {
