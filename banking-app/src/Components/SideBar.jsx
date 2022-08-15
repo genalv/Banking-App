@@ -23,6 +23,9 @@ export default function SideBar({ handleClickPage }) {
     } else if (value === 'Transfer') {
       setSidebarState('Transfer')
       handleClickPage(value)
+    } else if (value === 'Loan') {
+      setSidebarState('Loan')
+      handleClickPage(value)
     } else if (value === 'History') {
       setSidebarState('History')
       handleClickPage(value)
@@ -79,6 +82,15 @@ export default function SideBar({ handleClickPage }) {
                   onClick={() => handleClickState('Transfer')}>
                   <h1>
                     <i class='fa-solid fa-money-bill-transfer'></i> Transfer
+                  </h1>
+                </a>
+              </li>
+              <li>
+                <a
+                  className={sideBarState === 'Loan' ? 'has-text-white is-active' : 'has-text-white'}
+                  onClick={() => handleClickState('Loan')}>
+                  <h1>
+                    <i class='fa-solid fa-sack-dollar'></i> Loan
                   </h1>
                 </a>
               </li>

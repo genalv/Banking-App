@@ -20,8 +20,12 @@ export default function TransferPage({ index }) {
   const handleClickTransfer = () => {
     if (parseInt(transferValue) > parseInt(user.Balance)) {
       alert('Transfer Failed')
-    } else if (transferID == '' || transferValue == '') {
+      return
+    } else if (transferID === '' || transferValue === '') {
       alert('Please input a transfer ID or Amount')
+      return
+    } else if ( transferID === user.ID ){
+      alert('Invalid transaction')
     } else {
       for (let i = 0; i < userListLocalStorage.length; i++) {
         if (userListLocalStorage[i].ID === transferID) {
@@ -89,7 +93,7 @@ export default function TransferPage({ index }) {
                   />
 
                   <button className='button is-success has-text-centered' onClick={handleClickTransfer}>
-                    Confirmed
+                    Submit
                   </button>
                 </div>
               </div>

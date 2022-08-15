@@ -28,10 +28,11 @@ export default function HistoryPage({ index }) {
                     <th>Type</th>
 
                     <th>Amount</th>
+                    <th>Loan Deadline</th>
                   </thead>
                   <tbody>
                     {userHistory.length ? (
-                      userHistory.map(({ date, type, amount }, index) => {
+                      userHistory.map(({ date, type, amount, deadline }, index) => {
                         return (
                           <tr key={index}>
                             <td>{date}</td>
@@ -39,6 +40,7 @@ export default function HistoryPage({ index }) {
                             <th className={type == 'Withdraw' ? 'has-text-danger' : 'has-text-success'}>
                               $ {formatToCurrency(amount)}
                             </th>
+                            <th>{deadline}</th>
                           </tr>
                         )
                       })

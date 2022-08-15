@@ -1,33 +1,33 @@
 import React, { useState } from 'react'
 
-export default function ({ index }) {
+export default function LoanPage({ index }) {
   let userListLocalStorage = JSON.parse(localStorage.getItem('userListKey'))
   let user = userListLocalStorage[index]
   const time = new Date()
-  const [depositState, setDepositState] = useState({ depositValue: '' })
-  const { depositValue } = depositState
+  const [loanState, setLoanState] = useState({ loanValue: '' })
+  const { loanValue } = loanState
 
-  const handleChangeDeposit = (e) => {
+  const handleChangeLoan = (e) => {
     const { name, value } = e.target
-    setDepositState({ [name]: parseInt(value) })
+    setLoanState({ [name]: parseInt(value) })
   }
 
-  const handleClickDeposit = () => {
-    if (depositValue === '' ){
-      alert('Invalid')
-      return
-    } else if (parseInt(depositValue) < 0) {
-      alert('Cannot deposit a negative amount')
-      return
-    } else if (parseInt(depositValue) === 0 ){
-      alert('Deposit value invalid')
-      return
+  const handleClickLoan = () => {
+    if (loanValue === '' ){
+    alert('Invalid')
+    console.log(1);
+    return
+    } else if (parseInt(loanValue) < 0) {
+    alert('Cannot Loan a negative amount')
+    return
+    } else if (parseInt(loanValue) === 0 ){
+    alert('Loan value invalid')
+    return
     } else {
-      user.Balance = parseInt(user.Balance) + parseInt(depositValue)
-      user.History.push({ type: 'Deposit', date: time.toLocaleDateString(), amount: depositValue })
-      localStorage.setItem('userListKey', JSON.stringify(userListLocalStorage))
+    user.Balance = parseInt(user.Balance) + parseInt(loanValue)
+    user.History.push({ type: 'Loan', date: time.toLocaleDateString(), amount: loanValue, deadline: "" })
+    localStorage.setItem('userListKey', JSON.stringify(userListLocalStorage))
     }
-    setDepositState({ depositValue: '' })
   }
 
   //currency format
@@ -43,21 +43,21 @@ export default function ({ index }) {
             <div class='columns is-multiline '>
               <div class='column notification is-link is-full '>
                 <h1 className='title'>
-                  <i class='fa-solid fa-piggy-bank'></i> Deposit
+                  <i class='fa-solid fa-sack-dollar'></i> Loan
                 </h1>
               </div>
               <div className='column notification is-link '>
-                <h1 className='subtitle'>Amount Deposit: </h1>
+                <h1 className='subtitle'>Amount Loan: </h1>
                 <div className='container'>
                   <input
                     class='input is-link  is-large mb-2'
                     type='number'
                     placeholder='$ Amount'
-                    name='depositValue'
-                    value={depositValue}
-                    onChange={handleChangeDeposit}
+                    name='loanValue'
+                    value={loanValue}
+                    onChange={handleChangeLoan}
                   />
-                  <button class='button is-success has-text-centered' onClick={handleClickDeposit}>
+                  <button class='button is-success has-text-centered' onClick={handleClickLoan}>
                     Submit
                   </button>
                 </div>

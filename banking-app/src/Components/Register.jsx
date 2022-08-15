@@ -50,6 +50,10 @@ export default function Register() {
     setList({ ...list, [name]: value })
   }
 
+  const emailChecker = (object) => {
+    return object.Email === userEmail
+  }
+
   const handleClickRegister = () => {
     let newList = userList
     let listedUsers = {
@@ -62,16 +66,41 @@ export default function Register() {
       ID: Date.now(),
       isAdmin: false,
     }
-    listedUsers.UserName = userName
-    listedUsers.Password = userPassword
-    listedUsers.FullName = userFullName
-    listedUsers.Email = userEmail
-    listedUsers.Gender = userGender
-    listedUsers.Balance = userBalance
-    userListLocalStorage.push(listedUsers)
-    localStorage.setItem('userListKey', JSON.stringify(userListLocalStorage))
-    setList({ ...list, userList: newList })
-    navigate('/Login')
+
+    if (( userName[0] === '1' ) || ( userName[0] === '2' ) || ( userName[0] === '3' ) || ( userName[0] === '4' ) || ( userName[0] === '5' ) || ( userName[0] === '6' ) || ( userName[0] === '7' ) || ( userName[0] === '8' ) || ( userName[0] === '9' ) || ( userName[0] === '0' ) || userName === ''){
+      alert('Invalid username')
+      return;
+    } else {
+      if ( userPassword === '' ){
+        alert('Invalid password')
+        return
+      } else {
+        if (( userBalance === '' ) || (parseInt(userBalance) < 0) ){
+          alert('Invalid starting balance')
+          return
+        } else {
+          if (userEmail.indexOf('@') == -1 && userEmail.indexOf('.com') == -1) {
+            alert(`Email ${userEmail} is not a valid email address`) 
+            return
+          } else if (userList.some(emailChecker)) {
+            alert(`Email ${userEmail} is already in use`)
+            return
+          } else if (!userList.some(emailChecker) && userEmail.indexOf('@') > -1 && userEmail.indexOf('.com') > -1) {
+            listedUsers.UserName = userName
+            listedUsers.Password = userPassword
+            listedUsers.FullName = userFullName
+            listedUsers.Email = userEmail
+            listedUsers.Gender = userGender
+            listedUsers.Balance = userBalance
+            userListLocalStorage.push(listedUsers)
+            localStorage.setItem('userListKey', JSON.stringify(userListLocalStorage))
+            setList({ ...list, userList: newList })
+            navigate('/Login')
+            setList( {...list, userName: '', userPassword: '', userFullName: '', userEmail: '', userBalance: 0} )
+          }
+        }
+      }
+    }
   }
 
   return (

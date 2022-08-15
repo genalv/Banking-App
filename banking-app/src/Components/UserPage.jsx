@@ -5,6 +5,7 @@ import WithdrawPage from './WithdrawPage'
 import DepositPage from './DepositPage'
 import TransferPage from './TransferPage'
 import HistoryPage from './HistoryPage'
+import LoanPage from './LoanPage'
 
 export default function UserPage() {
   const [page, setPage] = useState('Home')
@@ -21,6 +22,8 @@ export default function UserPage() {
       setPage('Deposit')
     } else if (value === 'Transfer') {
       setPage('Transfer')
+    } else if (value === 'Loan') {
+      setPage('Loan')
     } else if (value === 'History') {
       setPage('History')
     }
@@ -33,6 +36,7 @@ export default function UserPage() {
       {page === 'Withdraw' && <WithdrawPage index={valueLoggedInIndex} />}
       {page === 'Deposit' && <DepositPage index={valueLoggedInIndex} />}
       {page === 'Transfer' && <TransferPage index={valueLoggedInIndex} />}
+      {page === 'Loan' && <LoanPage index={valueLoggedInIndex} />}
       {page === 'History' && <HistoryPage index={valueLoggedInIndex} />}
     </>
   )
